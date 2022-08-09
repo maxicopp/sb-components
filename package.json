@@ -1,7 +1,28 @@
 {
-  "name": "my-storybook",
+  "name": "mlc-my-storybook-components",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "license": "MIT",
+  "typings": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "homepage": "https://github.com/maxicopp",
+  "repository": {
+    "url": "https://github.com/maxicopp/react-pro-fh/tree/main/04-my-storybook",
+    "type": "git"
+  },
+  "peerDependencies": {
+    "react": ">=16",
+    "typescript": ">=4.0.0"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
@@ -17,10 +38,12 @@
   },
   "scripts": {
     "start": "start-storybook -p 6006",
-    "build": "build-storybook",
+    "build": "yarn clean && tsc && yarn copy-files",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic --project-token=573d721fe4c3"
+    "chromatic": "npx chromatic --project-token=573d721fe4c3",
+    "clean": "rimraf dist/",
+    "copy-files": "copyfiles -u 1 src/**/*.css dist/"
   },
   "eslintConfig": {
     "extends": [
@@ -53,9 +76,20 @@
     "@storybook/testing-library": "^0.0.13",
     "babel-loader": "^8.2.5",
     "chromatic": "^6.7.3",
+    "copyfiles": "^2.4.1",
     "css-loader": "^6.7.1",
-    "postcss": "^8.4.14"
+    "postcss": "^8.4.14",
+    "rimraf": "^3.0.2",
+    "semantic-release": "^19.0.3"
   },
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    "@semantic-release/github",
+    "@semantic-release/npm",
+    "@semantic-release/git"
+  ],
   "readme": "ERROR: No README data found!",
   "_id": "my-storybook@0.1.0"
 }
